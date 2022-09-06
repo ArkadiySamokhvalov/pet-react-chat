@@ -1,10 +1,10 @@
-import {
-  Form, Button, Row, Col,
-} from 'react-bootstrap';
 import React from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import YupPassword from 'yup-password';
+import {
+  Form, Button, Row, Col,
+} from 'react-bootstrap';
 import registrationImg from '../assets/img/registration.jpg';
 
 YupPassword(yup);
@@ -51,6 +51,7 @@ const Login = () => (
           >
             <Form.Group className="mb-3" controlId="formUsername">
               <Form.Control
+                size="lg"
                 name="username"
                 type="username"
                 placeholder="Username"
@@ -68,6 +69,7 @@ const Login = () => (
 
             <Form.Group className="mb-3" controlId="formPassword">
               <Form.Control
+                size="lg"
                 name="password"
                 type="password"
                 placeholder="Password"
@@ -84,7 +86,7 @@ const Login = () => (
             </Form.Group>
             <Button
               variant="outline-primary"
-              className="w-100"
+              className="w-100 btn-lg"
               type="submit"
               disabled={isSubmitting}
             >

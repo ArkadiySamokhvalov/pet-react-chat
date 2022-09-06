@@ -1,32 +1,26 @@
-// @ts-check
-
 import React from 'react';
-// import { Button } from 'react-bootstrap';
+import {
+  Row, Col,
+} from 'react-bootstrap';
+import notFoundImg from '../assets/img/notFound.jpg';
 
-const NotFoundPage = () => {
-  <div className="container">
-    <div className="row">
-      <div className="col-md-12">
-        <div className="error-template">
-          <h1>Oops!</h1>
-          <h2>404 Not Found</h2>
-          <div className="error-details">
-            Sorry, an error has occured, Requested page not found!
-          </div>
-          <div className="error-actions">
-            <a href="http://www.jquery2dotnet.com" className="btn btn-primary btn-lg">
-              <span className="glyphicon glyphicon-home"></span>
-              Take Me Home
-            </a>
-            <a href="http://www.jquery2dotnet.com" className="btn btn-default btn-lg">
-              <span className="glyphicon glyphicon-envelope"></span>
-              Contact Support
-            </a>
-          </div>
-        </div>
+const NotFoundPage = () => (
+  <Row className="justify-content-between align-content-center">
+    <Col xs="12" md="6" className="mb-3 mb-md-0">
+      <img src={notFoundImg} className="img-fluid d-block mx-auto" alt="" />
+    </Col>
+    <Col xs="12" md="6" className="error-template d-flex flex-column justify-content-center">
+      <h1 className="mb-4 text-center">No results found</h1>
+      <div className="error-details mb-3 text-center">
+        Sorry, an error has occured, Requested page not found!
       </div>
-    </div>
-  </div>;
-};
+      <div className="error-actions">
+        <a href="/" className="btn btn-outline-primary btn-lg w-100">
+          Back to home
+        </a>
+      </div>
+    </Col>
+  </Row>
+);
 
 export default NotFoundPage;
