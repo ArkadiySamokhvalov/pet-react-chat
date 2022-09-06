@@ -1,0 +1,9 @@
+body {
+  background: center/150% url("../img/background.jpg");
+}
+
+@include media-breakpoint-down(md) {
+  body {
+    background: center/300% url("../img/background.jpg");
+  }
+}
