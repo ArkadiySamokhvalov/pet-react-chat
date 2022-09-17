@@ -1,13 +1,13 @@
 import axios from 'axios';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import YupPassword from 'yup-password';
 
-import { useAuth } from '../hooks/index.js';
-import routes from '../routes.js';
+import { useAuth } from '../../hooks/index.js';
+import routes from '../../routes.js';
 
 YupPassword(yup);
 
@@ -17,6 +17,10 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const inputRef = useRef();
   const [authFailed, setAuthFailed] = useState(false);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -43,8 +47,8 @@ const LoginForm = () => {
       }
     },
     validationSchema: yup.object({
-      username: yup.string(),
-      password: yup.string(),
+      username: yup.string().required(),
+      password: yup.string().required(),
       // .min(8)
       // .minLowercase(1)
       // .minUppercase(1)

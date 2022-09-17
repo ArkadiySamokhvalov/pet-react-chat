@@ -7,3 +7,8 @@ body {
     background: center/300% url("../img/background.jpg");
   }
 }
+
+div#messagesBox {
+  max-height: 50vh;
+  overflow-y: auto;
+}

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
-import LoginForm from './LoginForm.jsx';
+import LoginForm from './Forms/LoginForm.jsx';
 import registrationImg from '../assets/img/registration.jpg';
+import log from '../log.js';
 
 const Login = () => (
   <Row className="justify-content-between align-content-center">
@@ -16,4 +17,4 @@ const Login = () => (
   </Row>
 );
 
-export default Login;
+export default log(Login);

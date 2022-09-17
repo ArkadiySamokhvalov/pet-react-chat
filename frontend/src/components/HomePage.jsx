@@ -1,5 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Row, Col } from 'react-bootstrap';
 
-const Home = () => (<h1>Home</h1>);
+import { useAuth } from '../hooks/index.js';
+import { fetchChatData } from '../slices/channelsSlice.js';
+import Channels from './Channels/Channels.jsx';
+import Messages from './Messages/Messages.jsx';
+import log from '../log.js';
 
-export default Home;
+const Home = () => {
+  const auth = useAuth();
+  const { getAuthHeader } = auth;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(fetchChatData(getAuthHeader)).unwrap();
+    };
+
+    fetchData();
+  }, [dispatch]);
+
+  return (
+    <Row>
+      <Col xs="12" md="4" className="mb-sm-4 mb-md-0 ps-0">
+        <Channels />
+      </Col>
+
+      <Col xs="12" md="8" className="p-0 h-100">
+        <Messages />
+      </Col>
+    </Row>
+  );
+};
+
+export default log(Home);
