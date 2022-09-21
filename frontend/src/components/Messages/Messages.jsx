@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { useSocket } from '../../hooks/index.js';
 import { actions as messagesActions } from '../../slices/messagesSlice.js';
-import MessagesForm from '../Forms/MessagesForm.jsx';
+import MessagesForm from './MessagesForm.jsx';
 import log from '../../log.js';
 
 const Messages = () => {

@@ -12,3 +12,20 @@ div#messagesBox {
   max-height: 50vh;
   overflow-y: auto;
 }
+
+// .modal-dialog {
+//   position: absolute;
+//   z-index: 1;
+//   margin: 0;
+//   width: 80%;
+//   min-width: 280px;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+// }
+
+.modal-form {
+  button {
+    min-width: 100px;
+  }
+}

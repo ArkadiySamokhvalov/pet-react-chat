@@ -9,15 +9,16 @@ import {
 import {
   Row, Col, Card,
 } from 'react-bootstrap';
+import socketio from 'socket.io-client';
 
-import AuthContext from '../contexts/authContext.js';
-import { SocketContext, socket } from '../contexts/socketContext.js';
+import { AuthContext, SocketContext } from '../contexts/index.js';
 import { useAuth } from '../hooks/index.js';
 import routes from '../routes.js';
 
 import NotFoundPage from './NotFoundPage.jsx';
 import LoginPage from './LoginPage.jsx';
 import HomePage from './HomePage.jsx';
+import Modals from './Modals/Modals.jsx';
 
 const AuthProvider = ({ children }) => {
   const currentUser = JSON.parse(localStorage.getItem('user'));
@@ -49,14 +50,16 @@ const PrivateOutlet = () => {
   return auth.user ? <Outlet /> : <Navigate to={routes.loginPagePath()} />;
 };
 
+const socket = socketio.connect('http://localhost:3000');
+
 const App = () => (
   <AuthProvider>
     <SocketContext.Provider value={socket}>
-      <main className="container-fluid h-100">
-        <Row className="justify-content-center align-items-md-center h-100">
-          <Col xs="12" md="10" xxl="8">
-            <Card className="card-shadow-sm">
-              <Card.Body className="card-body p-5">
+      <main className="container-fluid p-0">
+        <Row className="justify-content-center">
+          <Col xs="12" md="12" xxl="10" className="p-0 p-md-3">
+            <Card className="card-shadow-sm mt-4 mt-md-0">
+              <Card.Body className="card-body p-lg-3">
                 <BrowserRouter>
                   <Routes>
                     <Route path="*" element={<NotFoundPage />} />
@@ -71,6 +74,8 @@ const App = () => (
           </Col>
         </Row>
       </main>
+
+      <Modals />
     </SocketContext.Provider>
   </AuthProvider>
 );

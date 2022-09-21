@@ -46,9 +46,10 @@ const MessagesForm = React.forwardRef((_, ref) => {
           name="message"
           type="text"
           placeholder="Enter your message"
+          aria-label="New message"
           autoComplete="on"
           required="required"
-          className="border-0 p-0 ps-3"
+          className="border-0 ps-3"
           onChange={handleChange}
           value={values.message}
           ref={ref}

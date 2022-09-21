@@ -2,7 +2,7 @@
 
 import { createSlice, createEntityAdapter, createAsyncThunk } from '@reduxjs/toolkit';
 import { actions as channelsActions, fetchChatData } from './channelsSlice.js';
-import promisifySocket from '../utils/promisifySocket.js';
+import { promisifySocket } from '../utils/index.js';
 
 export const createMessage = createAsyncThunk(
   'messages/createMessage',
@@ -21,11 +21,10 @@ export const createMessage = createAsyncThunk(
 );
 
 const messagesAdapter = createEntityAdapter();
-const initialState = messagesAdapter.getInitialState();
 
 const messagesSlice = createSlice({
   name: 'messages',
-  initialState,
+  initialState: messagesAdapter.getInitialState(),
   reducers: {
     addMessage: messagesAdapter.addOne,
   },
@@ -37,9 +36,10 @@ const messagesSlice = createSlice({
         messagesAdapter.addMany(state, messages);
       })
       .addCase(channelsActions.removeChannel, (state, { payload }) => {
-        const { messages } = payload;
+        const { id: channelId } = payload;
         const allEntities = Object.values(state.entities);
-        const restEntities = allEntities.filter((e) => messages.includes(e.id)).map(({ id }) => id);
+        const restEntities = allEntities
+          .filter((message) => message.channelId === channelId);
 
         messagesAdapter.removeMany(state, restEntities);
       });
@@ -47,5 +47,4 @@ const messagesSlice = createSlice({
 });
 
 export const { actions } = messagesSlice;
-export const selectors = messagesAdapter.getSelectors((state) => state.messages);
 export default messagesSlice.reducer;

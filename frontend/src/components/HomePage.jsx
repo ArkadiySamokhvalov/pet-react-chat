@@ -23,11 +23,11 @@ const Home = () => {
 
   return (
     <Row>
-      <Col xs="12" md="4" className="mb-sm-4 mb-md-0 ps-0">
+      <Col xs="12" md="4" className="mb-sm-3 mb-md-0">
         <Channels />
       </Col>
 
-      <Col xs="12" md="8" className="p-0 h-100">
+      <Col xs="12" md="8" className="ps-0">
         <Messages />
       </Col>
     </Row>

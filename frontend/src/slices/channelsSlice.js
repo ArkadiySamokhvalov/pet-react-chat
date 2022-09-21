@@ -2,12 +2,40 @@
 
 import { createSlice, createEntityAdapter, createAsyncThunk } from '@reduxjs/toolkit';
 import { isEqual } from 'lodash';
+import { promisifySocket } from '../utils/index.js';
 
 export const fetchChatData = createAsyncThunk(
   'channels/fetchChatData',
   async (getAuthHeader, { extra: { axios, routes } }) => {
     const { data } = await axios.get(routes.dataPath(), { headers: getAuthHeader() });
     return data;
+  },
+);
+
+export const createChannelRequest = createAsyncThunk(
+  'channels/createChannel',
+  async (channel, { extra: { socket } }) => {
+    const createChannelSocket = promisifySocket((...arg) => socket.emit('newChannel', ...arg));
+    const responce = await createChannelSocket(channel);
+    return responce;
+  },
+);
+
+export const renameChannelRequest = createAsyncThunk(
+  'channels/renameChannel',
+  async ({ id, name }, { extra: { socket } }) => {
+    const renameChannelSocket = promisifySocket((...arg) => socket.emit('renameChannel', ...arg));
+    const responce = await renameChannelSocket({ id, name });
+    return responce;
+  },
+);
+
+export const removeChannelRequest = createAsyncThunk(
+  'channels/removeChannel',
+  async ({ id }, { extra: { socket } }) => {
+    const removeChannelSocket = promisifySocket((...arg) => socket.emit('removeChannel', ...arg));
+    const responce = await removeChannelSocket({ id });
+    return responce;
   },
 );
 
@@ -20,10 +48,26 @@ const channelsSlice = createSlice({
     loading: 'idle',
   }),
   reducers: {
-    addChannel: channelsAdapter.addOne,
-    renameChannel: channelsAdapter.updateOne,
-    removeChannel: (state, { payload }) => channelsAdapter.removeOne(state, payload.id),
-    setCurrentChannelId: (state, { payload }) => {
+    addChannel: (state, { payload }) => {
+      state.currentChannelId = payload.id;
+      return channelsAdapter.addOne(state, payload);
+    },
+    renameChannel: (state, action) => {
+      const { id } = action.payload;
+      state.entities[id] = { ...state.entities[id], ...action.payload };
+    },
+    removeChannel: (state, { payload }) => {
+      const { id } = payload;
+      const { ids } = state;
+
+      if (state.currentChannelId === id) {
+        // eslint-disable-next-line prefer-destructuring
+        state.currentChannelId = ids[0];
+      }
+
+      return channelsAdapter.removeOne(state, id);
+    },
+    changeCurrentChannel: (state, { payload }) => {
       state.currentChannelId = payload;
     },
   },
@@ -34,6 +78,7 @@ const channelsSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchChatData.fulfilled, (state, { payload }) => {
+        console.log(payload);
         const { channels, currentChannelId } = payload;
         const idsChannels = channels.map((channel) => channel.id);
 
