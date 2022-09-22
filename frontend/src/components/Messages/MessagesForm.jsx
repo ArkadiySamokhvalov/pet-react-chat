@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
 
-import Icon from '../helpers/Icon.jsx';
 import { createMessage } from '../../slices/messagesSlice.js';
 
 // eslint-disable-next-line react/display-name
@@ -26,11 +25,13 @@ const MessagesForm = React.forwardRef((_, ref) => {
       }
     },
     validationSchema: object({
-      messages: string(),
+      message: string().required(),
     }),
   });
   const {
     values,
+    touched,
+    errors,
     handleChange,
     handleSubmit,
     isSubmitting,
@@ -52,17 +53,19 @@ const MessagesForm = React.forwardRef((_, ref) => {
           className="border-0 ps-3"
           onChange={handleChange}
           value={values.message}
+          isValid={touched.message && !errors.message}
+          isInvalid={touched.message && errors.message}
           ref={ref}
         />
 
         <Button
-          variant="outline-secondary"
-          className="btn-group-vertical border-0"
+          variant="link"
+          className="btn-group-vertical border-0 text-decoration-none"
           type="submit"
           disabled={isSubmitting}
         >
           <span className="visually-hidden">Submit</span>
-          <Icon id={'arrow'} />
+          <span className="icon-arrow-right" />
         </Button>
       </Form.Group>
     </Form>

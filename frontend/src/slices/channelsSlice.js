@@ -78,7 +78,6 @@ const channelsSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchChatData.fulfilled, (state, { payload }) => {
-        console.log(payload);
         const { channels, currentChannelId } = payload;
         const idsChannels = channels.map((channel) => channel.id);
 

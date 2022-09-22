@@ -5,7 +5,6 @@ import { Button, ButtonGroup, Dropdown } from 'react-bootstrap';
 import { useSocket } from '../../hooks/index.js';
 import { actions as channelActions } from '../../slices/channelsSlice.js';
 import { openModal } from '../../slices/modalsSlice.js';
-import Icon from '../helpers/Icon.jsx';
 import log from '../../log.js';
 
 const Channels = () => {
@@ -45,9 +44,14 @@ const Channels = () => {
       <div className="d-flex align-items-center justify-content-between mb-2 ps-2">
         <span>Сhannels</span>
 
-        <Button variant="outline-primary" size="sm" onClick={() => handleShowModal('create')}>
+        <Button
+          variant="link"
+          size="sm"
+          className="border-0 text-decoration-none"
+          onClick={() => handleShowModal('create')}
+        >
           <span className="visually-hidden">Add channel</span>
-          <Icon id={'plus'} />
+          <span className="icon-plus" />
         </Button>
       </div>
 

@@ -15,10 +15,14 @@ import { AuthContext, SocketContext } from '../contexts/index.js';
 import { useAuth } from '../hooks/index.js';
 import routes from '../routes.js';
 
+import Header from './Header/Header.jsx';
 import NotFoundPage from './NotFoundPage.jsx';
 import LoginPage from './LoginPage.jsx';
+import SignupPage from './SignupPage.jsx';
 import HomePage from './HomePage.jsx';
 import Modals from './Modals/Modals.jsx';
+
+const socket = socketio.connect('http://localhost:3000');
 
 const AuthProvider = ({ children }) => {
   const currentUser = JSON.parse(localStorage.getItem('user'));
@@ -29,6 +33,11 @@ const AuthProvider = ({ children }) => {
     setUser({ username: userData.username });
   };
 
+  const logOut = () => {
+    localStorage.removeItem('user');
+    setUser(null);
+  };
+
   const getAuthHeader = () => {
     const userData = JSON.parse(localStorage.getItem('user'));
 
@@ -37,7 +46,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{
-      logIn, getAuthHeader, user,
+      logIn, logOut, getAuthHeader, user,
     }}
     >
       {children}
@@ -50,20 +59,21 @@ const PrivateOutlet = () => {
   return auth.user ? <Outlet /> : <Navigate to={routes.loginPagePath()} />;
 };
 
-const socket = socketio.connect('http://localhost:3000');
-
 const App = () => (
   <AuthProvider>
     <SocketContext.Provider value={socket}>
-      <main className="container-fluid p-0">
-        <Row className="justify-content-center">
-          <Col xs="12" md="12" xxl="10" className="p-0 p-md-3">
-            <Card className="card-shadow-sm mt-4 mt-md-0">
-              <Card.Body className="card-body p-lg-3">
+      <Header />
+
+      <main className="container-xxl h-100 px-0 mt-3 p-sm-3">
+        <Row className="h-100 justify-content-center align-items-center">
+          <Col>
+            <Card className="card-shadow-sm">
+              <Card.Body className="card-body">
                 <BrowserRouter>
                   <Routes>
                     <Route path="*" element={<NotFoundPage />} />
                     <Route path={routes.loginPagePath()} element={<LoginPage />} />
+                    <Route path={routes.signupPagePath()} element={<SignupPage />} />
                     <Route path={routes.homePagePath()} element={<PrivateOutlet />}>
                       <Route path="" element={<HomePage />} />
                     </Route>

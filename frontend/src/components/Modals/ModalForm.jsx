@@ -33,7 +33,6 @@ const ModalForm = ({ formik, btnVariant }) => {
           name="name"
           type="text"
           placeholder="Enter name"
-          aria-label="Create new channel"
           autoComplete="on"
           required="required"
           className="w-100"

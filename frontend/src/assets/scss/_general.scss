@@ -8,24 +8,35 @@ body {
   }
 }
 
-div#messagesBox {
-  max-height: 50vh;
+.chat-messages {
+  max-height: 60vh;
   overflow-y: auto;
+  height: 100%;
 }
 
-// .modal-dialog {
-//   position: absolute;
-//   z-index: 1;
-//   margin: 0;
-//   width: 80%;
-//   min-width: 280px;
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-// }
+.header {
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
 
 .modal-form {
   button {
     min-width: 100px;
   }
+}
+
+input.is-invalid + .btn-show {
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.btn-show {
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translate(0, -50%);
+  text-decoration: none;
+  font-size: 1.5rem;
 }

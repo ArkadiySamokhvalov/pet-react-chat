@@ -3,18 +3,22 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { object, string } from 'yup';
+import * as yup from 'yup';
+import YupPassword from 'yup-password';
 
 import { useAuth } from '../../hooks/index.js';
 import routes from '../../routes.js';
 
-const LoginForm = () => {
+YupPassword(yup);
+
+const SignupForm = () => {
   const auth = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const inputRef = useRef();
-  const [authError, setAuthError] = useState();
-  const [passwordShown, setPasswordShown] = useState(false);
+  const [authError, setAuthError] = useState([]);
+  const [passwordShown, setPasswordShown] = useState(null);
+  const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
 
   useEffect(() => {
     inputRef.current.focus();
@@ -24,19 +28,17 @@ const LoginForm = () => {
     initialValues: {
       username: '',
       password: '',
+      confirmPassword: '',
     },
     onSubmit: async (values, { setSubmitting }) => {
       setAuthError();
       try {
-        setSubmitting(true);
-        const response = await axios.post(routes.loginPath(), values);
+        const response = await axios.post(routes.signupPath(), values);
         auth.logIn(response.data);
         const { from } = location.state || { from: { pathname: routes.homePagePath() } };
         navigate(from);
       } catch (err) {
-        console.error(err);
-
-        if (err.response?.status === 401) {
+        if (err.response?.status === 409) {
           inputRef.current.select();
           setAuthError(err.message);
         }
@@ -44,9 +46,18 @@ const LoginForm = () => {
         setSubmitting(false);
       }
     },
-    validationSchema: object({
-      username: string().required(),
-      password: string().required(),
+    validationSchema: yup.object({
+      username: yup.string().required()
+        .min(3)
+        .max(20),
+      password: yup.string().required()
+        .min(6)
+        .minLowercase(1)
+        .minUppercase(1)
+        .minNumbers(1)
+        .minSymbols(1),
+      confirmPassword: yup.string().required()
+        .oneOf([yup.ref('password'), null]),
     }),
   });
 
@@ -86,6 +97,7 @@ const LoginForm = () => {
       <Form.Group className="mb-3 position-relative" controlId="formPassword">
         <Form.Control
           size="lg"
+          className=""
           name="password"
           type={passwordShown ? 'text' : 'password'}
           placeholder="Password"
@@ -109,6 +121,32 @@ const LoginForm = () => {
         </Form.Control.Feedback>
       </Form.Group>
 
+      <Form.Group className="mb-3 position-relative" controlId="formPassword">
+        <Form.Control
+          size="lg"
+          name="confirmPassword"
+          type={confirmPasswordShown ? 'text' : 'password'}
+          placeholder="Password confirmation"
+          autoComplete="on"
+          required="required"
+          onChange={handleChange}
+          value={values.confirmPassword}
+          isValid={touched.confirmPassword && !errors.confirmPassword && !authError}
+          isInvalid={touched.confirmPassword && errors.confirmPassword}
+        />
+        <Button
+          variant="link"
+          className="border-0 shadow-none btn-show"
+          onClick={() => setConfirmPasswordShown(!confirmPasswordShown)}
+        >
+          <span className="visually-hidden">Show Password Confirmation</span>
+          <span className={ confirmPasswordShown ? 'icon-eye' : 'icon-eye-blocked'} />
+        </Button>
+        <Form.Control.Feedback type="invalid">
+          {touched.confirmPassword && errors.confirmPassword}
+        </Form.Control.Feedback>
+      </Form.Group>
+
       <Button
         variant="outline-primary"
         className="w-100 btn-lg"
@@ -121,4 +159,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;
