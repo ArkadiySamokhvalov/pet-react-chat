@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 
 import { useSocket } from '../../hooks/index.js';
 import { actions as channelActions } from '../../slices/channelsSlice.js';
+import { filterBadWords } from '../../utils/index.js';
 import { openModal } from '../../slices/modalsSlice.js';
 import log from '../../log.js';
 
@@ -71,7 +72,7 @@ const Channels = () => {
                 onClick={() => handleChangeCurrentChannel(channel.id)}
               >
                 <span className="me-1">#</span>
-                {channel.name}
+                {filterBadWords(channel.name)}
               </Button>
 
               {channel.removable
