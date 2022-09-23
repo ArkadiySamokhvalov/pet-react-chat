@@ -9,6 +9,7 @@ import {
 import {
   Row, Col, Card,
 } from 'react-bootstrap';
+import { ToastContainer } from 'react-toastify';
 import socketio from 'socket.io-client';
 
 import { AuthContext, SocketContext } from '../contexts/index.js';
@@ -86,6 +87,7 @@ const App = () => (
       </main>
 
       <Modals />
+      <ToastContainer />
     </SocketContext.Provider>
   </AuthProvider>
 );

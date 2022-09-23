@@ -1,6 +1,14 @@
 export default {
   translation: {
     local: 'Русский',
+    toast: {
+      createChannel: 'Channel create.',
+      renameChannel: 'Channel renamed.',
+      removeChannel: 'Channel deleted.',
+      network: 'Connection error, please reload the page.',
+      sendMessage: 'Error sending message.',
+      authorization: 'Authorization failed, try logging out and logging in again.',
+    },
     channels: {
       channels: 'Channels',
       addChannel: 'Add channel',

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 import { createMessage } from '../../slices/messagesSlice.js';
 
@@ -20,14 +21,14 @@ const MessagesForm = React.forwardRef((_, ref) => {
         setSubmitting(true);
         dispatch(createMessage(values.message.trim())).unwrap();
       } catch (err) {
-        console.error(err);
+        toast.error(t('error.sendMessage'));
       } finally {
         resetForm({ values: '' });
         setSubmitting(false);
       }
     },
     validationSchema: object({
-      message: string().required(),
+      message: string().required(t('login.required')),
     }),
   });
   const {

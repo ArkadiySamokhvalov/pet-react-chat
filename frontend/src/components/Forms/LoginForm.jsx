@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 import { useAuth } from '../../hooks/index.js';
 import routes from '../../routes.js';
@@ -36,7 +37,7 @@ const LoginForm = () => {
         const { from } = location.state || { from: { pathname: routes.homePagePath() } };
         navigate(from);
       } catch (err) {
-        console.error(err);
+        toast.error(t('toast.network'));
 
         if (err.response?.status === 401) {
           inputRef.current.select();

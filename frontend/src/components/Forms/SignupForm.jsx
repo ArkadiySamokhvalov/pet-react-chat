@@ -6,6 +6,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import YupPassword from 'yup-password';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 import { useAuth } from '../../hooks/index.js';
 import routes from '../../routes.js';
@@ -40,6 +41,8 @@ const SignupForm = () => {
         const { from } = location.state || { from: { pathname: routes.homePagePath() } };
         navigate(from);
       } catch (err) {
+        toast.error(t('toast.network'));
+
         if (err.response?.status === 409) {
           inputRef.current.select();
           setAuthError(t('errors.409'));
