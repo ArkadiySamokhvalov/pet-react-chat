@@ -1,9 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 import { useModal } from '../../hooks/index.js';
 
 const ModalForm = ({ formik, btnVariant }) => {
+  const { t } = useTranslation();
   const handleCloseModal = useModal();
   const ref = useRef(null);
 
@@ -32,7 +34,7 @@ const ModalForm = ({ formik, btnVariant }) => {
         <Form.Control
           name="name"
           type="text"
-          placeholder="Enter name"
+          placeholder={t('modals.name')}
           autoComplete="on"
           required="required"
           className="w-100"
@@ -55,7 +57,7 @@ const ModalForm = ({ formik, btnVariant }) => {
           className="border-0 me-3"
           onClick={() => handleCloseModal()}
         >
-          Cancel
+          {t('modals.cancel')}
         </Button>
 
         <Button
@@ -64,7 +66,7 @@ const ModalForm = ({ formik, btnVariant }) => {
           type="submit"
           disabled={isSubmitting}
         >
-          Send
+          {t('modals.submit')}
         </Button>
       </div>
     </Form>

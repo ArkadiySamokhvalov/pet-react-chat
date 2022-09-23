@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
+import { useTranslation } from 'react-i18next';
 
 import { useModal } from '../../hooks/index.js';
 import { createChannelRequest } from '../../slices/channelsSlice.js';
@@ -12,7 +13,8 @@ import ModalForm from './ModalForm.jsx';
 const CreateChannelModal = () => {
   const dispatch = useDispatch();
   const handleCloseModal = useModal();
-  const title = 'Create channel';
+  const { t } = useTranslation();
+  const title = t('modals.createTitle');
   const btnVariant = 'success';
 
   const formik = useFormik({

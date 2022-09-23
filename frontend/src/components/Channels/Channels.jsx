@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, ButtonGroup, Dropdown } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 import { useSocket } from '../../hooks/index.js';
 import { actions as channelActions } from '../../slices/channelsSlice.js';
@@ -8,6 +9,7 @@ import { openModal } from '../../slices/modalsSlice.js';
 import log from '../../log.js';
 
 const Channels = () => {
+  const { t } = useTranslation();
   const socket = useSocket();
   const dispatch = useDispatch();
   const { entities, currentChannelId } = useSelector((state) => state.channels);
@@ -42,7 +44,7 @@ const Channels = () => {
   return (
     <React.Fragment>
       <div className="d-flex align-items-center justify-content-between mb-2 ps-2">
-        <span>Сhannels</span>
+        <span>{t('channels.channels')}</span>
 
         <Button
           variant="link"
@@ -50,7 +52,7 @@ const Channels = () => {
           className="border-0 text-decoration-none"
           onClick={() => handleShowModal('create')}
         >
-          <span className="visually-hidden">Add channel</span>
+          <span className="visually-hidden">{t('channels.addChannel')}</span>
           <span className="icon-plus" />
         </Button>
       </div>
@@ -73,10 +75,10 @@ const Channels = () => {
                   <Dropdown.Toggle split variant={setButtonColorVariant(channel.id)} id="dropdown-split-basic" />
                     <Dropdown.Menu>
                     <Dropdown.Item onClick={() => handleShowModal('remove', channel)}>
-                      Remove
+                      {t('channels.removeChannel')}
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => handleShowModal('rename', channel)}>
-                      Rename
+                      {t('channels.renameChannel')}
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </React.Fragment>

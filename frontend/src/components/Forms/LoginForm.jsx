@@ -4,11 +4,13 @@ import { Form, Button } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
+import { useTranslation } from 'react-i18next';
 
 import { useAuth } from '../../hooks/index.js';
 import routes from '../../routes.js';
 
 const LoginForm = () => {
+  const { t } = useTranslation();
   const auth = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
@@ -38,15 +40,15 @@ const LoginForm = () => {
 
         if (err.response?.status === 401) {
           inputRef.current.select();
-          setAuthError(err.message);
+          setAuthError(t('errors.401'));
         }
       } finally {
         setSubmitting(false);
       }
     },
     validationSchema: object({
-      username: string().required(),
-      password: string().required(),
+      username: string().required(t('login.required')),
+      password: string().required(t('login.required')),
     }),
   });
 
@@ -69,7 +71,7 @@ const LoginForm = () => {
           size="lg"
           name="username"
           type="username"
-          placeholder="Username"
+          placeholder={t('login.username')}
           autoComplete="on"
           required="required"
           onChange={handleChange}
@@ -88,7 +90,7 @@ const LoginForm = () => {
           size="lg"
           name="password"
           type={passwordShown ? 'text' : 'password'}
-          placeholder="Password"
+          placeholder={t('login.password')}
           autoComplete="on"
           required="required"
           onChange={handleChange}
@@ -101,7 +103,7 @@ const LoginForm = () => {
           className="border-0 shadow-none btn-show"
           onClick={() => setPasswordShown(!passwordShown)}
         >
-          <span className="visually-hidden">Show Password</span>
+          <span className="visually-hidden">{t('login.showPassword')}</span>
           <span className={ passwordShown ? 'icon-eye' : 'icon-eye-blocked'} />
         </Button>
         <Form.Control.Feedback type="invalid">
@@ -115,7 +117,7 @@ const LoginForm = () => {
         type="submit"
         disabled={isSubmitting}
       >
-        Submit
+        {t('login.submit')}
       </Button>
     </Form>
   );

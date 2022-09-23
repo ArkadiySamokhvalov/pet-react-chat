@@ -3,11 +3,13 @@ import { Button, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
+import { useTranslation } from 'react-i18next';
 
 import { createMessage } from '../../slices/messagesSlice.js';
 
 // eslint-disable-next-line react/display-name
 const MessagesForm = React.forwardRef((_, ref) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -46,8 +48,8 @@ const MessagesForm = React.forwardRef((_, ref) => {
         <Form.Control
           name="message"
           type="text"
-          placeholder="Enter your message"
-          aria-label="New message"
+          placeholder={t('messages.message')}
+          aria-label={t('messages.ariaLable')}
           autoComplete="on"
           required="required"
           className="border-0 ps-3"
@@ -64,7 +66,7 @@ const MessagesForm = React.forwardRef((_, ref) => {
           type="submit"
           disabled={isSubmitting}
         >
-          <span className="visually-hidden">Submit</span>
+          <span className="visually-hidden">{t('messages.submit')}</span>
           <span className="icon-arrow-right" />
         </Button>
       </Form.Group>

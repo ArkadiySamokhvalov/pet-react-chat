@@ -1,25 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navbar, Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 import { useAuth } from '../../hooks/index.js';
 import routes from '../../routes.js';
 
 const Header = () => {
+  const { t, i18n } = useTranslation();
   const auth = useAuth();
   const { user, logOut } = auth;
+  const currentLanguage = localStorage.getItem('language') === 'En' ? 'Ru' : 'En';
+  const [language, setLanguage] = useState(currentLanguage);
+
+  const handleChangeLanguage = () => {
+    const nextLanguage = language === 'En' ? 'Ru' : 'En';
+    localStorage.setItem('language', language);
+    i18n.changeLanguage(language.toLowerCase());
+    setLanguage(nextLanguage);
+  };
 
   return (
     <header className="header container-fluid">
       <Navbar expand="lg" className="d-flex justify-content-between container-xxl">
         <Navbar.Brand href={routes.homePagePath()}>React Chat</Navbar.Brand>
-        {user
-          && <Button
-            variant="outline-primary"
-            onClick={logOut}
+        <div>
+          <Button
+            variant="primary"
+            className="me-3"
+            onClick={handleChangeLanguage}
           >
-            Log out
+              {t('local')}
           </Button>
-        }
+          {user
+            && <Button
+              variant="outline-primary"
+              onClick={logOut}
+            >
+              {t('logout')}
+            </Button>
+          }
+        </div>
       </Navbar>
     </header>
   );

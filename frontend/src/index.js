@@ -1,18 +1,17 @@
 import './assets/scss/style.scss';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
 
-import App from './components/App.jsx';
-import store from './slices/index.js';
+import init from './init.jsx';
 import reportWebVitals from './reportWebVitals.js';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-);
+const app = async () => {
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  const vdom = await init();
+  root.render(<React.StrictMode>{vdom}</React.StrictMode>);
+};
+
+app();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

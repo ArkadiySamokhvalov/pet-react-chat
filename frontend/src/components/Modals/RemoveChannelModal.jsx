@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 import { useModal } from '../../hooks/index.js';
 import { removeChannelRequest } from '../../slices/channelsSlice.js';
@@ -9,9 +10,10 @@ import ModalBase from './ModalBase.jsx';
 const RemoveChannelModal = () => {
   const dispatch = useDispatch();
   const handleCloseModal = useModal();
+  const { t } = useTranslation();
   const { channel } = useSelector((state) => state.modals);
   const { id } = channel;
-  const title = 'Remove channel';
+  const title = t('modals.removeTitle');
   const btnVariant = 'danger';
 
   const handleRemoveChannel = () => {
@@ -21,13 +23,14 @@ const RemoveChannelModal = () => {
 
   return (
     <ModalBase title={title}>
-      <p>Are you sure?</p>
+      <p>{t('modals.warning')}</p>
       <div className="d-flex align-itms-center justify-end">
         <Button
           variant="secondary"
           className="btn-group-vertical border-0 me-3"
+          onClick={() => handleCloseModal()}
         >
-          <span onClick={() => handleCloseModal()}>Cancel</span>
+          {t('modals.cancel')}
         </Button>
         <Button
           variant={btnVariant}
@@ -35,7 +38,7 @@ const RemoveChannelModal = () => {
           type="submit"
           onClick={handleRemoveChannel}
         >
-          <span>Delete</span>
+          {t('modals.delete')}
         </Button>
       </div>
     </ModalBase>

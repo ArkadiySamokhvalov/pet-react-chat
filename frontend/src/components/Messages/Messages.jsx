@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { useSocket } from '../../hooks/index.js';
 import { actions as messagesActions } from '../../slices/messagesSlice.js';
@@ -9,6 +10,7 @@ import MessagesForm from './MessagesForm.jsx';
 import log from '../../log.js';
 
 const Messages = () => {
+  const { t } = useTranslation();
   const { entities: channels, currentChannelId } = useSelector((state) => state.channels);
   const { entities: messages } = useSelector((state) => state.messages);
   const currentChannel = channels[currentChannelId];
@@ -38,7 +40,7 @@ const Messages = () => {
             {currentChannel && currentChannel.name}
            </b>
         </p>
-        <span className="text-muted">{ messageCount } messages</span>
+        <span className="text-muted">{t('messages.count', { count: messageCount })}</span>
       </div>
 
       <div id="messagesBox" className="chat-messages overflow-auto px-3 my-3">
