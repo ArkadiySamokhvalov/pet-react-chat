@@ -8,7 +8,6 @@ import { useAuth } from '../hooks/index.js';
 import { fetchChatData } from '../slices/channelsSlice.js';
 import Channels from './Channels/Channels.jsx';
 import Messages from './Messages/Messages.jsx';
-import log from '../log.js';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -45,4 +44,4 @@ const Home = () => {
   );
 };
 
-export default log(Home);
+export default Home;

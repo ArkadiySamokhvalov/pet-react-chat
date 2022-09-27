@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useModal } from '../../hooks/index.js';
 import { removeChannelRequest } from '../../slices/channelsSlice.js';
 import ModalBase from './ModalBase.jsx';
+import { ModalCancelButton, ModalButtonsGroup } from '../Forms/FormBlocks.jsx';
 
 const RemoveChannelModal = () => {
   const dispatch = useDispatch();
@@ -24,23 +25,16 @@ const RemoveChannelModal = () => {
   return (
     <ModalBase title={title}>
       <p>{t('modals.warning')}</p>
-      <div className="d-flex align-itms-center justify-end">
+      <ModalButtonsGroup>
+        <ModalCancelButton/>
         <Button
-          variant="secondary"
-          className="btn-group-vertical border-0 me-3"
-          onClick={() => handleCloseModal()}
-        >
-          {t('modals.cancel')}
+            variant={btnVariant}
+            className="btn-group-vertical border-0"
+            onClick={handleRemoveChannel}
+          >
+            {t('modals.delete')}
         </Button>
-        <Button
-          variant={btnVariant}
-          className="btn-group-vertical border-0"
-          type="submit"
-          onClick={handleRemoveChannel}
-        >
-          {t('modals.delete')}
-        </Button>
-      </div>
+      </ModalButtonsGroup>
     </ModalBase>
   );
 };

@@ -3,9 +3,9 @@ import { Row, Col } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 import LoginForm from './Forms/LoginForm.jsx';
+
 import registrationImg from '../assets/img/registration.jpg';
 import routes from '../routes.js';
-import log from '../log.js';
 
 const Login = () => {
   const { t } = useTranslation();
@@ -27,4 +27,4 @@ const Login = () => {
   );
 };
 
-export default log(Login);
+export default Login;

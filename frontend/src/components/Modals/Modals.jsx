@@ -6,7 +6,6 @@ import { closeModal } from '../../slices/modalsSlice.js';
 import CreateChannelModal from './CreateChannelModal.jsx';
 import RenameChannelModal from './RenameChannelModal.jsx';
 import RemoveChannelModal from './RemoveChannelModal.jsx';
-import log from '../../log.js';
 
 const Modals = () => {
   const dispatch = useDispatch();
@@ -31,4 +30,4 @@ const Modals = () => {
   );
 };
 
-export default log(Modals);
+export default Modals;

@@ -27,7 +27,7 @@ body {
   }
 }
 
-input.is-invalid + .btn-show {
+input.is-invalid + .btn-show, input.is-valid + .btn-show {
   top: 1.5rem;
   right: 1.5rem;
 }

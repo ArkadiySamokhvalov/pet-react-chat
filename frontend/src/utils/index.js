@@ -24,4 +24,8 @@ const filterBadWords = (text) => {
   return badWordsFilter.clean(englishFilteredText);
 };
 
-export { promisifySocket, getChannelsNames, filterBadWords };
+const capitalizeFirstLetter = (string) => string[0].toUpperCase() + string.slice(1);
+
+export {
+  promisifySocket, getChannelsNames, filterBadWords, capitalizeFirstLetter,
+};

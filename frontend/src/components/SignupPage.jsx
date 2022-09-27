@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 
 import SignupForm from './Forms/SignupForm.jsx';
 import registrationImg from '../assets/img/registration.jpg';
-import log from '../log.js';
 
 const Signup = () => {
   const { t } = useTranslation();
@@ -22,4 +21,4 @@ const Signup = () => {
   );
 };
 
-export default log(Signup);
+export default Signup;
