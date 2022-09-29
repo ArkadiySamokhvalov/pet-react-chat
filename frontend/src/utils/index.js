@@ -26,6 +26,11 @@ const filterBadWords = (text) => {
 
 const capitalizeFirstLetter = (string) => string[0].toUpperCase() + string.slice(1);
 
+const changeLocation = (location, navigate, routes) => {
+  const { from } = location.state || { from: { pathname: routes.homePagePath() } };
+  navigate(from);
+};
+
 export {
-  promisifySocket, getChannelsNames, filterBadWords, capitalizeFirstLetter,
+  promisifySocket, getChannelsNames, filterBadWords, capitalizeFirstLetter, changeLocation,
 };

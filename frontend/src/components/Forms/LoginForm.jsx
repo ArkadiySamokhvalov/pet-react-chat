@@ -9,9 +9,15 @@ import { toast } from 'react-toastify';
 import { FormContext } from '../../contexts/index.js';
 import { useAuth } from '../../hooks/index.js';
 import routes from '../../routes.js';
+import { changeLocation } from '../../utils/index.js';
 import {
   FormBase, FormUsernameGroup, FormSubmitButton, FormPassGroup,
 } from './FormBlocks.jsx';
+
+const schema = (t) => object({
+  username: string().required(t('form.required')),
+  password: string().required(t('form.required')),
+});
 
 const LoginForm = () => {
   const { t } = useTranslation();
@@ -20,19 +26,13 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [authError, setAuthError] = useState();
 
-  const schema = object({
-    username: string().required(t('form.required')),
-    password: string().required(t('form.required')),
-  });
-
   const handleSubmitForm = async (values, { setSubmitting }) => {
     try {
       setAuthError();
       setSubmitting(true);
-      const response = await axios.post(routes.loginPath(), values);
-      auth.logIn(response.data);
-      const { from } = location.state || { from: { pathname: routes.homePagePath() } };
-      navigate(from);
+      const { data } = await axios.post(routes.loginPath(), values);
+      auth.logIn(data);
+      changeLocation(location, navigate, routes);
     } catch (err) {
       if (err.response?.status === 401) {
         setAuthError(t('errors.401'));
@@ -50,7 +50,7 @@ const LoginForm = () => {
       password: '',
     },
     onSubmit: handleSubmitForm,
-    validationSchema: schema,
+    validationSchema: schema(t),
   });
 
   return (
