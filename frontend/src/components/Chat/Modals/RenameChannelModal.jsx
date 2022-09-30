@@ -22,6 +22,7 @@ const RenameChannelModal = () => {
   return (
     <ModalBase title={title}>
       <ModalForm
+        title={title}
         initialValues={initialValues}
         action={handleRenameChannel}
         btnVariant={btnVariant}

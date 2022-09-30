@@ -3,6 +3,7 @@ import { io } from 'socket.io-client';
 import React from 'react';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
+import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 
@@ -36,6 +37,13 @@ const store = configureStore({
 const i18n = i18next.createInstance();
 const currentLanguage = localStorage.getItem('language') || 'ru';
 
+const rollbarToken = process.env.ROLLBAR_ACCESS_TOKEN || null;
+const rollbarConfig = {
+  accessToken: rollbarToken,
+  environment: 'production',
+  enabled: true,
+};
+
 export default async () => {
   socket.on('newChannel', (payload) => {
     store.dispatch(channelActions.addChannel(payload));
@@ -58,13 +66,17 @@ export default async () => {
     });
 
   const vdom = (
-    <Provider store={store}>
-      <AuthProvider>
-        <I18nextProvider i18n={i18n}>
-          <App />
-        </I18nextProvider>
-      </AuthProvider>
-    </Provider>
+    <RollbarProvider config={rollbarConfig}>
+      <ErrorBoundary>
+        <Provider store={store}>
+          <AuthProvider>
+            <I18nextProvider i18n={i18n}>
+              <App />
+            </I18nextProvider>
+          </AuthProvider>
+        </Provider>
+      </ErrorBoundary>
+    </RollbarProvider>
   );
 
   return vdom;

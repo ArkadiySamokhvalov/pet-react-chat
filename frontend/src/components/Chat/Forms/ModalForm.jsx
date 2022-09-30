@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
+import { useRollbar } from '@rollbar/react';
 import { useDispatch } from 'react-redux';
 import { object, string } from 'yup';
 import { useTranslation } from 'react-i18next';
@@ -11,8 +12,11 @@ import {
   FormBase, FormTextGroup, FormSubmitButton, ModalCancelButton, ModalButtonsGroup,
 } from '../../Layouts/Form.jsx';
 
-const ModalForm = ({ initialValues, action, btnVariant }) => {
+const ModalForm = ({
+  title, initialValues, action, btnVariant,
+}) => {
   const dispatch = useDispatch();
+  const rollbar = useRollbar();
   const { t } = useTranslation();
   const handleCloseModal = useModal();
 
@@ -26,11 +30,12 @@ const ModalForm = ({ initialValues, action, btnVariant }) => {
     try {
       setSubmitting(true);
       dispatch(action(values.name.trim()));
-      handleCloseModal();
     } catch (err) {
-      toast.error(t('toast.network'));
+      toast.error(t('errors.network'));
+      rollbar.error(title, err);
     } finally {
       setSubmitting(false);
+      handleCloseModal();
     }
   };
 

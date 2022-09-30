@@ -19,6 +19,7 @@ const CreateChannelModal = () => {
   return (
     <ModalBase title={title}>
       <ModalForm
+        title={title}
         initialValues={initialValues}
         action={handleCreateChannel}
         btnVariant={btnVariant}

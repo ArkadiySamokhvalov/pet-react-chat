@@ -1,0 +1,2 @@
+- name: Rollbar deploy
+  uses: rollbar/github-deploy-action@2.1.1

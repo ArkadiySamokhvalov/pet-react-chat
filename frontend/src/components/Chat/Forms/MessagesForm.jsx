@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
+import { useRollbar } from '@rollbar/react';
 import { useDispatch } from 'react-redux';
 import { object, string } from 'yup';
 import { useTranslation } from 'react-i18next';
@@ -11,6 +12,7 @@ import { FormBase, FormSubmitButton, FormTextGroup } from '../../Layouts/Form.js
 const MessagesForm = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const rollbar = useRollbar();
 
   const initialValues = {
     message: '',
@@ -26,6 +28,7 @@ const MessagesForm = () => {
       dispatch(createMessage(values.message.trim()));
     } catch (err) {
       toast.error(t('error.sendMessage'));
+      rollbar.error(t('error.sendMessage'), err);
     } finally {
       resetForm({ values: '' });
       setSubmitting(false);

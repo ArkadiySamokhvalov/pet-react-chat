@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { useRollbar } from '@rollbar/react';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -35,6 +36,7 @@ export const FormAuth = ({
   initialValues, schema, path, error, children,
 }) => {
   const { t } = useTranslation();
+  const rollbar = useRollbar();
   const { logIn } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
@@ -51,8 +53,10 @@ export const FormAuth = ({
     } catch (err) {
       if (err.response?.status === error) {
         setAuthError(t(`errors.${error}`));
+        rollbar.error(t(`errors.${error}`), err);
       } else {
         toast.error(t('errors.network'));
+        rollbar.error(t('errors.network'), err);
       }
     } finally {
       setSubmitting(false);
