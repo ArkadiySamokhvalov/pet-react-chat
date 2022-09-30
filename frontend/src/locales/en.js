@@ -5,9 +5,6 @@ export default {
       createChannel: 'Channel create.',
       renameChannel: 'Channel renamed.',
       removeChannel: 'Channel deleted.',
-      network: 'Connection error, please reload the page.',
-      sendMessage: 'Error sending message.',
-      authorization: 'Authorization failed, try logging out and logging in again.',
     },
     form: {
       required: 'Required field.',
@@ -65,6 +62,9 @@ export default {
     errors: {
       401: 'The specified username and password are not correct.',
       409: 'The specified username is already taken.',
+      network: 'Connection error, please reload the page.',
+      sendMessage: 'Error sending message.',
+      authorization: 'Authorization failed, try logging out and logging in again.',
     },
   },
 };

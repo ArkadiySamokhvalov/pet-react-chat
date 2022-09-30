@@ -20,9 +20,10 @@ const RemoveChannelModal = () => {
   const title = t('modals.removeTitle');
   const btnVariant = 'danger';
 
-  const handleRemoveChannel = () => {
+  const handleRemoveChannel = async () => {
     try {
-      dispatch(removeChannelRequest({ id }));
+      await dispatch(removeChannelRequest({ id }));
+      toast.success(t('toast.removeChannel'));
     } catch (err) {
       toast.error(t('errors.network'));
       rollbar.error(t('modals.removeTitle'), err);

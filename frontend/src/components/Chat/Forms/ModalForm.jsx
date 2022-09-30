@@ -13,7 +13,7 @@ import {
 } from '../../Layouts/Form.jsx';
 
 const ModalForm = ({
-  title, initialValues, action, btnVariant,
+  notification, initialValues, action, btnVariant,
 }) => {
   const dispatch = useDispatch();
   const rollbar = useRollbar();
@@ -30,9 +30,10 @@ const ModalForm = ({
     try {
       setSubmitting(true);
       dispatch(action(values.name.trim()));
+      toast.success(notification);
     } catch (err) {
       toast.error(t('errors.network'));
-      rollbar.error(title, err);
+      rollbar.error(notification, err);
     } finally {
       setSubmitting(false);
       handleCloseModal();

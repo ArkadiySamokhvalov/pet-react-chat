@@ -11,6 +11,7 @@ const RenameChannelModal = () => {
   const { id, name } = channel;
   const { t } = useTranslation();
   const title = t('modals.renameTitle');
+  const notification = t('toast.renameChannel');
   const btnVariant = 'primary';
 
   const initialValues = {
@@ -22,7 +23,7 @@ const RenameChannelModal = () => {
   return (
     <ModalBase title={title}>
       <ModalForm
-        title={title}
+        notification={notification}
         initialValues={initialValues}
         action={handleRenameChannel}
         btnVariant={btnVariant}

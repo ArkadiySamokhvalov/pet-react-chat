@@ -8,6 +8,7 @@ import ModalForm from '../Forms/ModalForm.jsx';
 const CreateChannelModal = () => {
   const { t } = useTranslation();
   const title = t('modals.createTitle');
+  const notification = t('toast.createChannel');
   const btnVariant = 'success';
 
   const handleCreateChannel = (channelName) => createChannelRequest({ name: channelName });
@@ -19,7 +20,7 @@ const CreateChannelModal = () => {
   return (
     <ModalBase title={title}>
       <ModalForm
-        title={title}
+        notification={notification}
         initialValues={initialValues}
         action={handleCreateChannel}
         btnVariant={btnVariant}
