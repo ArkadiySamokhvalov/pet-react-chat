@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-import { useModal } from '../../hooks/index.js';
-import { removeChannelRequest } from '../../slices/channelsSlice.js';
-import ModalBase from './ModalBase.jsx';
-import { ModalCancelButton, ModalButtonsGroup } from '../Forms/FormBlocks.jsx';
+import { useModal } from '../../../hooks/index.js';
+import { removeChannelRequest } from '../../../slices/channelsSlice.js';
+import ModalBase from '../../Layouts/Modal.jsx';
+import { ModalCancelButton, ModalButtonsGroup } from '../../Layouts/Form.jsx';
 
 const RemoveChannelModal = () => {
   const dispatch = useDispatch();

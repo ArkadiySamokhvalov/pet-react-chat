@@ -1,10 +1,11 @@
 import { createContext } from 'react';
 
 const AuthContext = createContext({});
-const SocketContext = createContext();
-const ModalContext = createContext();
-const FormContext = createContext();
+const ApiContext = createContext(null);
+const ModalContext = createContext(null);
+const FormContext = createContext(null);
+const AuthErrorContext = createContext(null);
 
 export {
-  AuthContext, SocketContext, ModalContext, FormContext,
+  AuthContext, ApiContext, ModalContext, FormContext, AuthErrorContext,
 };

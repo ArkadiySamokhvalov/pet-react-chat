@@ -4,10 +4,10 @@ import { Row, Col } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
-import { useAuth } from '../hooks/index.js';
-import { fetchChatData } from '../slices/channelsSlice.js';
-import Channels from './Channels/Channels.jsx';
-import Messages from './Messages/Messages.jsx';
+import { useAuth } from '../../hooks/index.js';
+import { fetchChatData } from '../../slices/channelsSlice.js';
+import Channels from '../Chat/Channels/Channels.jsx';
+import Messages from '../Chat/Messages/Messages.jsx';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -18,18 +18,18 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await dispatch(fetchChatData(getAuthHeader)).unwrap();
+        await dispatch(fetchChatData(getAuthHeader));
       } catch (err) {
         if (err.response?.status === 401) {
-          toast.error(t('toast.authorization'));
+          toast.error(t('errors.401'));
         } else {
-          toast.error(t('toast.network'));
+          toast.error(t('errors.network'));
         }
       }
     };
 
     fetchData();
-  }, [dispatch]);
+  }, []);
 
   return (
     <Row>

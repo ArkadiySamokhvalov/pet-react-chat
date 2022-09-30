@@ -2,6 +2,7 @@
 
 import { createSlice, createEntityAdapter, createAsyncThunk } from '@reduxjs/toolkit';
 import { isEqual } from 'lodash';
+
 import { promisifySocket } from '../utils/index.js';
 
 export const fetchChatData = createAsyncThunk(
