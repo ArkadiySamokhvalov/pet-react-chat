@@ -7,7 +7,7 @@
 Чат на на React/Redux, используя AJAX, REST, websockets, React (с хуками) + Redux (@reduxjs/toolkit) + Formik.
 
 ## Публикация:
-https://react-chat-pet-project.herokuapp.com/
+[Посмотреть проект](https://react-chat-pet-project.herokuapp.com/)
 
 ## Технологический стек:
 - Работа с WebSocket - **[Socket.IO](https://socket.io/)**
