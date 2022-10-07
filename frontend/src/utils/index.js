@@ -26,6 +26,15 @@ const filterBadWords = (text) => {
 
 const capitalizeFirstLetter = (string) => string[0].toUpperCase() + string.slice(1);
 
+const generateEmoji = (e) => {
+  const sym = e.unified.split('-');
+  const codesArray = [];
+  sym.forEach((el) => codesArray.push(`0x${el}`));
+  const emoji = String.fromCodePoint(...codesArray);
+
+  return emoji;
+};
+
 export {
-  promisifySocket, getChannelsNames, filterBadWords, capitalizeFirstLetter,
+  promisifySocket, getChannelsNames, filterBadWords, capitalizeFirstLetter, generateEmoji,
 };

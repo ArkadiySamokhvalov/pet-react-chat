@@ -8,17 +8,15 @@ body {
   }
 }
 
-.chat-messages {
-  max-height: 60vh;
-  overflow-y: auto;
-  height: 100%;
-}
-
 .header {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+}
+
+.main {
+  height: calc(100vh - 56px - 2rem);
 }
 
 .modal-form {
@@ -40,3 +38,18 @@ input.is-invalid + .btn-show, input.is-valid + .btn-show {
   text-decoration: none;
   font-size: 1.5rem;
 }
+
+.custom-scrollbars__content {
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.custom-scrollbars__content::-webkit-scrollbar {
+  display: none;
+}
+
+#dropdownEmoji::after, .epr-preview-emoji-label {
+  display: none !important;
+}
+
