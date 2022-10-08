@@ -16,7 +16,7 @@ const MessagesList = ({ messages }) => {
   return (
     <div
       id="messagesBox"
-      className="chat-messages overflow-auto px-3 my-3"
+      className="custom-scrollbar chat-messages overflow-auto flex-grow-1 px-3 my-3"
       ref={messagesList}
     >
       {messages.map((message) => (

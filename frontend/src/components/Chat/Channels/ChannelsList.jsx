@@ -12,7 +12,7 @@ const ChannelsList = ({ showModal, changeCurrentChannel }) => {
   const setButtonColorVariant = (id) => ((currentChannelId === id) ? 'secondary' : 'link');
 
   return (
-    <ul id="channelsBox" className="nav nav-pills flex-column">
+    <ul id="channelsBox" className="custom-scrollbar nav nav-pills flex-column flex-nowrap overflow-auto h-100">
       {Object.values(channels).map((channel) => (
         <li className="nav-item w-100" key={channel.id}>
           <Dropdown as={ButtonGroup} className="w-100">
