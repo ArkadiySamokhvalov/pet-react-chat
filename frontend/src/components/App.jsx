@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -9,10 +9,10 @@ import {
 import { ToastContainer } from 'react-toastify';
 
 import { useAuth } from '../hooks/index.js';
+import { WindowWidthContext } from '../contexts/index.js';
 import routes from '../routes.js';
 
 import Header from './Layouts/Header.jsx';
-import Main from './Layouts/Main.jsx';
 import NotFoundPage from './Pages/NotFoundPage.jsx';
 import LoginPage from './Pages/LoginPage.jsx';
 import SignupPage from './Pages/SignupPage.jsx';
@@ -24,25 +24,30 @@ const PrivateOutlet = () => {
   return auth.user ? <Outlet /> : <Navigate to={routes.loginPagePath()} />;
 };
 
-const App = () => (
-  <BrowserRouter>
-    <Header />
+const App = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  window.addEventListener('resize', () => setWindowWidth(window.innerWidth));
 
-    <Main>
-      <Routes>
-        <Route path="*" element={<NotFoundPage />} />
-        <Route path={routes.loginPagePath()} element={<LoginPage />} />
-        <Route path={routes.signupPagePath()} element={<SignupPage />} />
-        <Route path={routes.homePagePath()} element={<PrivateOutlet />}>
-          <Route path="" element={<HomePage />} />
-        </Route>
-      </Routes>
-    </Main>
+  return (
+    <WindowWidthContext.Provider value={windowWidth}>
+      <BrowserRouter>
+        <Header />
 
-    <Modals />
+        <Routes>
+          <Route path="*" element={<NotFoundPage />} />
+          <Route path={routes.loginPagePath()} element={<LoginPage />} />
+          <Route path={routes.signupPagePath()} element={<SignupPage />} />
+          <Route path={routes.homePagePath()} element={<PrivateOutlet />}>
+            <Route path="" element={<HomePage />} />
+          </Route>
+        </Routes>
 
-    <ToastContainer />
-  </BrowserRouter>
-);
+        <Modals />
+
+        <ToastContainer />
+      </BrowserRouter>
+    </WindowWidthContext.Provider>
+  );
+};
 
 export default App;

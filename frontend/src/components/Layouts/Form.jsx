@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import { Form, Button } from 'react-bootstrap';
@@ -21,6 +22,7 @@ export const FormBase = ({
     initialValues,
     onSubmit,
     validationSchema,
+    enableReinitialize: true,
   });
 
   return (
@@ -161,6 +163,7 @@ export const FormPassGroup = ({ name }) => {
 };
 
 export const FormTextGroup = ({ name, classes, feedback = true }) => {
+  const ref = useRef();
   const formik = useForm();
   const {
     values,
@@ -168,11 +171,10 @@ export const FormTextGroup = ({ name, classes, feedback = true }) => {
     touched,
     handleChange,
   } = formik;
-  const inputRef = useRef();
   const { t } = useTranslation();
 
   useEffect(() => {
-    inputRef.current.focus();
+    ref.current.focus();
   }, []);
 
   return (
@@ -188,8 +190,8 @@ export const FormTextGroup = ({ name, classes, feedback = true }) => {
         isInvalid={touched[name] && errors[name]}
         onChange={handleChange}
         value={values[name]}
-        ref={inputRef}
-        onFocus={() => inputRef.current.select()}
+        ref={ref}
+        onFocus={() => ref.current.select()}
       />
 
       <Form.Control.Feedback type="invalid" className={feedback ? 'w-100' : 'd-none'}>

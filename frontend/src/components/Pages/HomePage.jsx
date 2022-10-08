@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 
 import { useAuth } from '../../hooks/index.js';
 import { fetchChatData } from '../../slices/channelsSlice.js';
+import { MainChat } from '../Layouts/Main.jsx';
 import Channels from '../Chat/Channels/Channels.jsx';
 import Messages from '../Chat/Messages/Messages.jsx';
 
@@ -29,18 +30,20 @@ const Home = () => {
     };
 
     fetchData();
-  }, []);
+  }, [dispatch, t]);
 
   return (
-    <Row>
-      <Col xs="12" md="4" className="mb-sm-3 mb-md-0">
-        <Channels />
-      </Col>
+    <MainChat>
+      <Row className="h-100">
+        <Col xs="12" sm="4" lg="3" className="channels p-0">
+          <Channels />
+        </Col>
 
-      <Col xs="12" md="8" className="ps-0">
-        <Messages />
-      </Col>
-    </Row>
+        <Col className="messages p-0 ps-sm-3">
+          <Messages />
+        </Col>
+      </Row>
+    </MainChat>
   );
 };
 

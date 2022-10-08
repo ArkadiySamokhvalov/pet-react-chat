@@ -18,13 +18,13 @@ const Channels = () => {
   };
 
   return (
-    <React.Fragment>
+    <div className="d-flex flex-column">
       <ChannelsHeader showModal={handleShowModal} />
       <ChannelsList
         showModal={handleShowModal}
         changeCurrentChannel={handleChangeCurrentChannel}
       />
-    </React.Fragment>
+    </div>
   );
 };
 

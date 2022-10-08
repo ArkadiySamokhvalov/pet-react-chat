@@ -2,23 +2,16 @@ body {
   background: center/150% url("../img/background.jpg");
 }
 
-@include media-breakpoint-down(md) {
-  body {
-    background: center/300% url("../img/background.jpg");
-  }
-}
-
-.chat-messages {
-  max-height: 60vh;
-  overflow-y: auto;
-  height: 100%;
-}
-
 .header {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  height: 7vh;
+}
+
+main {
+  height: 93vh;
 }
 
 .modal-form {
@@ -39,4 +32,35 @@ input.is-invalid + .btn-show, input.is-valid + .btn-show {
   transform: translate(0, -50%);
   text-decoration: none;
   font-size: 1.5rem;
+}
+
+#dropdownEmoji::after {
+  display: none !important;
+}
+
+.channels, .channels>div, #channelsBox, .messages {
+  height: 100%;
+}
+
+
+.channels-dropdown {
+  max-height: 60vh;
+  min-height: 20vh;
+}
+
+@include media-breakpoint-down(md) {
+  body {
+    background: center/300% url("../img/background.jpg");
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .channels {
+    height: 22%;
+    padding-bottom: 1rem !important;
+  }
+
+  .messages {
+    height: 78%;
+  }
 }

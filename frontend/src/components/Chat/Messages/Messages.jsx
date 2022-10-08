@@ -17,7 +17,9 @@ const Messages = () => {
     <div className="d-flex flex-column h-100">
       <MessagesChannelHeader channel={currentChannel} count={messageCount} />
       <MessagesList messages={currentChannelMessages} />
-      <MessagesForm/>
+      <div className="mt-auto">
+        <MessagesForm/>
+      </div>
     </div>
   );
 };

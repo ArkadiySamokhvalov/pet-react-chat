@@ -29,6 +29,8 @@ export default {
       addChannel: 'Добавить канал',
       removeChannel: 'Удалить',
       renameChannel: 'Переименовать',
+      allChannels: 'Все каналы',
+      empty: 'Нет других каналов',
     },
     messages: {
       submit: 'Отправить сообщение',
