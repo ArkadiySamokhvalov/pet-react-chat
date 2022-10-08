@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { filterBadWords } from '../../utils/index.js';
+import { filterBadWords } from '../../../utils/index.js';
 
 const MessagesChannelHeader = ({ channel, count }) => {
   const { t } = useTranslation();

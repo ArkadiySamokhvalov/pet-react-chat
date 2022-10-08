@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Button, ButtonGroup, Dropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-import { filterBadWords } from '../../utils/index.js';
+import { filterBadWords } from '../../../utils/index.js';
 
 const ChannelsList = ({ showModal, changeCurrentChannel }) => {
   const { t } = useTranslation();

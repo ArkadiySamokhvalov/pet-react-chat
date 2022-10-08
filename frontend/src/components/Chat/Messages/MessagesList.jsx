@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { filterBadWords } from '../../utils/index.js';
+import { filterBadWords } from '../../../utils/index.js';
 
 const MessagesList = ({ messages }) => {
   const messagesList = useRef();
