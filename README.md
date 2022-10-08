@@ -1,5 +1,4 @@
 [![Actions Status](https://github.com/ArkadiySamokhvalov/react-chat/actions/workflows/nodeci.yml/badge.svg)](https://github.com/ArkadiySamokhvalov/react-chat/actions)
-[![Actions Status](https://github.com/ArkadiySamokhvalov/react-chat/actions/workflows/rollbar.yml/badge.svg)](https://github.com/ArkadiySamokhvalov/react-chat/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/dfa4aae841075724b5aa/maintainability)](https://codeclimate.com/github/ArkadiySamokhvalov/react-chat/maintainability)
 
 [![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/ArkadiySamokhvalov/react-chat/blob/main/README.en.md)
