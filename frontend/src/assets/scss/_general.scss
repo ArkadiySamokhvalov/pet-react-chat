@@ -2,21 +2,16 @@ body {
   background: center/150% url("../img/background.jpg");
 }
 
-@include media-breakpoint-down(md) {
-  body {
-    background: center/300% url("../img/background.jpg");
-  }
-}
-
 .header {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  height: 7vh;
 }
 
-.main {
-  height: calc(100vh - 56px - 2rem);
+main {
+  height: 93vh;
 }
 
 .modal-form {
@@ -39,17 +34,33 @@ input.is-invalid + .btn-show, input.is-valid + .btn-show {
   font-size: 1.5rem;
 }
 
-.custom-scrollbars__content {
-  overflow: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.custom-scrollbars__content::-webkit-scrollbar {
-  display: none;
-}
-
-#dropdownEmoji::after, .epr-preview-emoji-label {
+#dropdownEmoji::after {
   display: none !important;
 }
 
+.channels, .channels>div, #channelsBox, .messages {
+  height: 100%;
+}
+
+
+.channels-dropdown {
+  max-height: 60vh;
+  min-height: 20vh;
+}
+
+@include media-breakpoint-down(md) {
+  body {
+    background: center/300% url("../img/background.jpg");
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .channels {
+    height: 22%;
+    padding-bottom: 1rem !important;
+  }
+
+  .messages {
+    height: 78%;
+  }
+}

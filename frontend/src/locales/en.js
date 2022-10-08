@@ -29,6 +29,8 @@ export default {
       addChannel: 'Add channel',
       removeChannel: 'Remove',
       renameChannel: 'Rename',
+      allChannels: 'All channels',
+      empty: 'No other channels',
     },
     messages: {
       submit: 'Send a message',

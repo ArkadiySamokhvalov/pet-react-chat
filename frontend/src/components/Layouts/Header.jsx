@@ -21,12 +21,11 @@ const Header = () => {
 
   return (
     <header className="header container-fluid">
-      <Navbar expand="lg" className="d-flex justify-content-between container-xxl">
-        <Navbar.Brand href={routes.homePagePath()}>React Chat</Navbar.Brand>
+      <Navbar expand="lg" className="d-flex justify-content-between container-lg px-0">
+        <Navbar.Brand href={routes.homePagePath()} className="m-0">React Chat</Navbar.Brand>
         <div>
           <Button
             variant="primary"
-            className="me-3"
             onClick={handleChangeLanguage}
           >
               {t('local')}
@@ -34,6 +33,7 @@ const Header = () => {
           {user
             && <Button
               variant="outline-primary"
+              className="ms-3"
               onClick={logOut}
             >
               {t('logout')}

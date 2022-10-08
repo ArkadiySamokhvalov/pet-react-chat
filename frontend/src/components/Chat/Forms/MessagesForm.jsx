@@ -29,7 +29,6 @@ const MessagesForm = () => {
   const handleSubmitForm = async (values, { setSubmitting, resetForm }) => {
     try {
       setSubmitting(true);
-      console.log(values.message);
       dispatch(createMessage(values.message));
     } catch (err) {
       toast.error(t('error.sendMessage'));
