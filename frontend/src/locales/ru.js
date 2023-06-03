@@ -56,6 +56,7 @@ export default {
     signup: {
       registration: 'Регистрация',
       submit: 'Зарегистрироваться',
+      alreadyRegistered: 'Уже зарегистрированы?',
     },
     logout: 'Выйти',
     notFound: {

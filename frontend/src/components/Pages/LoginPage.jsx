@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { Link } from 'react-router-dom';
 import routes from '../../routes.js';
 import { Main } from '../Layouts/Main.jsx';
 import Page from '../Layouts/Page.jsx';
@@ -19,7 +20,7 @@ const Login = () => {
 
         <div className="text-center mt-3">
           <span className="d-inline-block me-1">{t('login.notAccount')}</span>
-          <a href={routes.signupPagePath()}>{t('signup.registration')}</a>
+          <Link to={routes.signupPagePath()}>{t('signup.registration')}</Link>
         </div>
       </Page>
     </Main>
