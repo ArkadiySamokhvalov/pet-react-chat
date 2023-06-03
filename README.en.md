@@ -7,7 +7,7 @@
 React/Redux chat using AJAX, REST, websockets, React (with hooks) + Redux (@reduxjs/toolkit) + Formik.
 
 ## Publication:
-[View the project](https://react-chat-pet-project.herokuapp.com/)
+[View the project](https://react-chat-git-main-arkadiysamokhvalov.vercel.app/)
 
 ## Technology stack:
 - Working with WebSocket - **[Socket.IO](https://socket.io/)**
